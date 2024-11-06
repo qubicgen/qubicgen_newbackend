@@ -1,5 +1,6 @@
 import express from "express";
 import ProjectFormOperations from "../controllers/projectController";
+import checkAuth from "../config/checkAuth";
 
 const router = express.Router();
 
@@ -55,7 +56,7 @@ router.post("/createProject", ProjectFormOperations.create);
  *       500:
  *         description: Failed to retrieve project form entries
  */
-router.get("/projects", ProjectFormOperations.getAll);
+router.get("/projects", checkAuth,ProjectFormOperations.getAll);
 
 /**
  * @swagger
@@ -78,7 +79,7 @@ router.get("/projects", ProjectFormOperations.getAll);
  *       500:
  *         description: Failed to retrieve project form entry
  */
-router.get("/getProjectDetails/:id", ProjectFormOperations.getById);
+router.get("/getProjectDetails/:id", checkAuth,ProjectFormOperations.getById);
 
 /**
  * @swagger
@@ -118,7 +119,7 @@ router.get("/getProjectDetails/:id", ProjectFormOperations.getById);
  *       500:
  *         description: Failed to update project form entry
  */
-router.put("/updateProject/:id", ProjectFormOperations.update);
+router.put("/updateProject/:id", checkAuth,ProjectFormOperations.update);
 
 /**
  * @swagger
@@ -139,6 +140,6 @@ router.put("/updateProject/:id", ProjectFormOperations.update);
  *       500:
  *         description: Failed to delete project form entry
  */
-router.delete("/deleteProject/:id", ProjectFormOperations.delete);
+router.delete("/deleteProject/:id", checkAuth,ProjectFormOperations.delete);
 
 export default router;

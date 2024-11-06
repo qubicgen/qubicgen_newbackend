@@ -1,5 +1,6 @@
 import { Router } from "express";
 import QueryOperations from "../controllers/queryController";
+import checkAuth from "../config/checkAuth";
 
 const router = Router();
 
@@ -43,7 +44,7 @@ const router = Router();
  *       500:
  *         description: Failed to create query entry
  */
-router.post("/newQuery", QueryOperations.create);
+router.post("/newQuery", checkAuth,QueryOperations.create);
 
 /**
  * @swagger
@@ -57,7 +58,7 @@ router.post("/newQuery", QueryOperations.create);
  *       500:
  *         description: Failed to retrieve query entries
  */
-router.get("/allQueries", QueryOperations.getAll);
+router.get("/allQueries", checkAuth,QueryOperations.getAll);
 
 /**
  * @swagger
@@ -80,7 +81,7 @@ router.get("/allQueries", QueryOperations.getAll);
  *       500:
  *         description: Failed to retrieve query entry
  */
-router.get("/getQueryDetails/:id", QueryOperations.getById);
+router.get("/getQueryDetails/:id", checkAuth,QueryOperations.getById);
 
 /**
  * @swagger
@@ -122,7 +123,7 @@ router.get("/getQueryDetails/:id", QueryOperations.getById);
  *       500:
  *         description: Failed to update query entry
  */
-router.put("/updateQuery/:id", QueryOperations.update);
+router.put("/updateQuery/:id", checkAuth,QueryOperations.update);
 
 /**
  * @swagger
@@ -143,6 +144,6 @@ router.put("/updateQuery/:id", QueryOperations.update);
  *       500:
  *         description: Failed to delete query entry
  */
-router.delete("/deleteQuery/:id", QueryOperations.delete);
+router.delete("/deleteQuery/:id", checkAuth,QueryOperations.delete);
 
 export default router;

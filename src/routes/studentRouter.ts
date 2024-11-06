@@ -1,5 +1,6 @@
 import { Router } from "express";
 import StudentFormOperations from "../controllers/studentController";
+import checkAuth from "../config/checkAuth";
 
 const router = Router();
 
@@ -57,7 +58,7 @@ router.post("/student-forms", StudentFormOperations.create);
  *       500:
  *         description: Failed to retrieve student form entries
  */
-router.get("/student-forms", StudentFormOperations.getAll);
+router.get("/student-forms", checkAuth,StudentFormOperations.getAll);
 
 /**
  * @swagger
@@ -80,7 +81,7 @@ router.get("/student-forms", StudentFormOperations.getAll);
  *       500:
  *         description: Failed to retrieve student form entry
  */
-router.get("/student-forms/:id", StudentFormOperations.getById);
+router.get("/student-forms/:id", checkAuth,StudentFormOperations.getById);
 
 /**
  * @swagger
@@ -122,7 +123,7 @@ router.get("/student-forms/:id", StudentFormOperations.getById);
  *       500:
  *         description: Failed to update student form entry
  */
-router.put("/student-forms/:id", StudentFormOperations.update);
+router.put("/student-forms/:id", checkAuth,StudentFormOperations.update);
 
 /**
  * @swagger
@@ -143,6 +144,6 @@ router.put("/student-forms/:id", StudentFormOperations.update);
  *       500:
  *         description: Failed to delete student form entry
  */
-router.delete("/student-forms/:id", StudentFormOperations.delete);
+router.delete("/student-forms/:id", checkAuth,StudentFormOperations.delete);
 
 export default router;

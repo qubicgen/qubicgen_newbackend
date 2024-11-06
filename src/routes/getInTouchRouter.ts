@@ -1,5 +1,6 @@
 import { Router } from "express";
 import GetInTouchOperations from "../controllers/getInTouchController";
+import checkAuth from "../config/checkAuth";
 const router = Router();
 
 /**
@@ -48,7 +49,7 @@ router.post('/newRequest', GetInTouchOperations.createNewGetInTouch);
  *       500:
  *         description: Failed to retrieve entries
  */
-router.get('/allRequests', GetInTouchOperations.getAllGetInTouchRequest);
+router.get('/allRequests', checkAuth,GetInTouchOperations.getAllGetInTouchRequest);
 
 /**
  * @swagger
@@ -71,7 +72,7 @@ router.get('/allRequests', GetInTouchOperations.getAllGetInTouchRequest);
  *       500:
  *         description: Failed to retrieve entry
  */
-router.get('/getRequestDetails/:id', GetInTouchOperations.getById);
+router.get('/getRequestDetails/:id', checkAuth,GetInTouchOperations.getById);
 
 /**
  * @swagger
@@ -105,7 +106,7 @@ router.get('/getRequestDetails/:id', GetInTouchOperations.getById);
  *       500:
  *         description: Failed to update entry
  */
-router.put('/updateRequest/:id', GetInTouchOperations.updateId);
+router.put('/updateRequest/:id', checkAuth,GetInTouchOperations.updateId);
 
 /**
  * @swagger
@@ -126,6 +127,6 @@ router.put('/updateRequest/:id', GetInTouchOperations.updateId);
  *       500:
  *         description: Failed to delete entry
  */
-router.delete('/deleteRequestById/:id', GetInTouchOperations.deleteById);
+router.delete('/deleteRequestById/:id', checkAuth,GetInTouchOperations.deleteById);
 
 export default router;

@@ -5,6 +5,7 @@ import getInTouchRouter from './routes/getInTouchRouter'
 import projectRouter from './routes/projectRouter'
 import studentRouter from './routes/studentRouter'
 import queryRouter from './routes/queryRouter'
+import authenticationRouter from './routes/authRouter'
 import swaggerUi from 'swagger-ui-express'
 import swaggerSpec from './config/swagger'
 import cors from 'cors'
@@ -19,6 +20,7 @@ app.use('/qubicgen',getInTouchRouter)
 app.use('/qubicgen',projectRouter)
 app.use('/qubicgen',studentRouter)
 app.use('/qubicgen',queryRouter)
+app.use('/qubicgen',authenticationRouter)
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 app.use(cors({

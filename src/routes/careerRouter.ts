@@ -1,5 +1,6 @@
 import { Router } from "express";
 import CareerOperations from "../controllers/careerController";
+import checkAuth from "../config/checkAuth";
 const router = Router();
 
 /**
@@ -119,7 +120,7 @@ router.post('/newCareer', CareerOperations.createNewCareer);
  *       500:
  *         description: Failed to retrieve careers
  */
-router.get('/allCareers', CareerOperations.getAllCareers);
+router.get('/allCareers', checkAuth,CareerOperations.getAllCareers);
 
 /**
  * @swagger
@@ -146,7 +147,7 @@ router.get('/allCareers', CareerOperations.getAllCareers);
  *       500:
  *         description: Failed to retrieve career
  */
-router.get('/getCareerDetails/:careerId', CareerOperations.getCareerById);
+router.get('/getCareerDetails/:careerId', checkAuth,CareerOperations.getCareerById);
 
 /**
  * @swagger
@@ -179,7 +180,7 @@ router.get('/getCareerDetails/:careerId', CareerOperations.getCareerById);
  *       500:
  *         description: Failed to update career
  */
-router.put('/updateCareer/:careerId', CareerOperations.updateCareer);
+router.put('/updateCareer/:careerId', checkAuth,CareerOperations.updateCareer);
 
 /**
  * @swagger
@@ -202,6 +203,6 @@ router.put('/updateCareer/:careerId', CareerOperations.updateCareer);
  *       500:
  *         description: Failed to delete career
  */
-router.delete('/deleteCareer/:careerId', CareerOperations.deleteCareer);
+router.delete('/deleteCareer/:careerId', checkAuth,CareerOperations.deleteCareer);
 
 export default router;
