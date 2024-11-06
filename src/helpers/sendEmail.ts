@@ -1,5 +1,6 @@
 import transporter from '../config/nodemailerConfig';
-import nodemailer from 'nodemailer'
+import nodemailer from 'nodemailer';
+
 interface EmailOptions {
   to: string;
   subject: string;
@@ -25,5 +26,3 @@ export const sendEmail = async ({ to, subject, text, html }: EmailOptions) => {
     console.error('Error sending email:', error);
   }
 };
-
- 

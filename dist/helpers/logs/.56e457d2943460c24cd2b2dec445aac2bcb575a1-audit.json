@@ -1,0 +1,15 @@
+{
+    "keep": {
+        "days": true,
+        "amount": 14
+    },
+    "auditLog": "D:\\QubicgenPortfolio\\backendNew\\dist\\helpers\\logs\\.56e457d2943460c24cd2b2dec445aac2bcb575a1-audit.json",
+    "files": [
+        {
+            "date": 1730907438492,
+            "name": "D:\\QubicgenPortfolio\\backendNew\\dist\\helpers\\logs\\application-2024-11-06.log",
+            "hash": "f21b3a20e4e8214bf225b377966a870a7074731976efdffa2a8e76df7f0cb32c"
+        }
+    ],
+    "hashType": "sha256"
+}
