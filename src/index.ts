@@ -9,6 +9,7 @@ import authenticationRouter from './routes/authRouter'
 import swaggerUi from 'swagger-ui-express'
 import swaggerSpec from './config/swagger'
 import cors from 'cors'
+import { Request,Response } from 'express'
 dotenv.config()
 const port=9098
 
@@ -31,7 +32,9 @@ app.use('/qubicgen',authenticationRouter)
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 app.use('/uploads', express.static('uploads'));
 
-
+app.get('/',(req:Request,res:Response)=>{
+  res.status(200).send('Hello from qubicgen backend')
+})
 app.listen(port, () => {
     console.log(`Server started on http://localhost:${port}, api documentation available at http://localhost:${port}/api-docs`);
   });
