@@ -32,6 +32,6 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 app.use('/uploads', express.static('uploads'));
 
 
-  app.listen(port, () => {
+app.listen(port, () => {
     console.log(`Server started on http://localhost:${port}, api documentation available at http://localhost:${port}/api-docs`);
   });
