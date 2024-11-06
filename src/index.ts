@@ -19,6 +19,7 @@ app.use(express.json())
 app.use(cors({
   origin: [
     'https://qubicgen.com',
+    'https://qubicgen.com/',
     'http://qubicgen.com',
     'http://localhost:5173',
     'https://qg.vidyantra-dev.com'
