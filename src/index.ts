@@ -13,6 +13,7 @@ const port=9098
 
 
 const app=express()
+app.use(express.json())
 app.use('/qubicgen',careerRouter)
 app.use('/qubicgen',getInTouchRouter)
 app.use('/qubicgen',projectRouter)
