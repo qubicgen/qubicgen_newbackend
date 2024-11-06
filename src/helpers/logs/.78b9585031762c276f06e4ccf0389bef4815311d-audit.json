@@ -1,0 +1,15 @@
+{
+    "keep": {
+        "days": true,
+        "amount": 14
+    },
+    "auditLog": "/Users/boseraju/Desktop/QubicGen Website/Qubicgen_newbackend/src/helpers/logs/.78b9585031762c276f06e4ccf0389bef4815311d-audit.json",
+    "files": [
+        {
+            "date": 1730885761070,
+            "name": "/Users/boseraju/Desktop/QubicGen Website/Qubicgen_newbackend/src/helpers/logs/application-2024-11-06.log",
+            "hash": "07cfee6f73344e6645208459a14a65f2f74a9fa12e31106d896f05414d7a9590"
+        }
+    ],
+    "hashType": "sha256"
+}

@@ -1,5 +1,7 @@
 import { PrismaClient } from "@prisma/client";
 import { Request, Response } from "express";
+import fs from 'fs';
+import path from 'path';
 
 const prisma = new PrismaClient();
 
@@ -26,6 +28,8 @@ class CareerOperations {
     } = req.body;
 
     try {
+      const resumePath = req.file ? req.file.path : '';
+      
       const newCareer = await prisma.careers.create({
         data: {
           fullName,
@@ -38,16 +42,20 @@ class CareerOperations {
           branch:branch,
           collegeName:collegeName,
           address:address,
-          passedOutYear: new Date(passedOutYear), // Assuming passedOutYear is in YYYY-MM-DD format
+          passedOutYear: new Date(passedOutYear),
           tenthPercentage:tenthPercentage,
           twelthPercentage:twelthPercentage,
           graduationPercentage:graduationPercentage,
-          resume:resume,
+          resume: resumePath,
           comments:comments,
         },
       });
-      res.status(201).json(newCareer); // Return the newly created career
+      
+      res.status(201).json(newCareer);
     } catch (error) {
+      if (req.file) {
+        fs.unlinkSync(req.file.path); // Clean up uploaded file if database operation fails
+      }
       res.status(500).json({ error: "Failed to create new career" });
     }
   };
@@ -133,12 +141,59 @@ class CareerOperations {
   static deleteCareer = async (req: Request, res: Response): Promise<void> => {
     const { id } = req.params;
     try {
+      const career = await prisma.careers.findUnique({
+        where: { id },
+      });
+
+      if (career?.resume && fs.existsSync(career.resume)) {
+        fs.unlinkSync(career.resume);
+      }
+
       const deletedCareer = await prisma.careers.delete({
         where: { id },
       });
+
       res.status(200).json({ message: "Career deleted successfully", deletedCareer });
     } catch (error) {
       res.status(500).json({ error: "Failed to delete career" });
+    }
+  };
+
+  // Add new method for updating resume
+  static updateResume = async (req: Request, res: Response): Promise<void> => {
+    const { careerId } = req.params;
+    
+    try {
+      // Get existing career to find old resume
+      const existingCareer = await prisma.careers.findUnique({
+        where: { id: careerId },
+      });
+
+      if (!existingCareer) {
+        if (req.file) fs.unlinkSync(req.file.path);
+        res.status(404).json({ error: "Career not found" });
+        return;
+      }
+
+      // Delete old resume file if it exists
+      if (existingCareer.resume && fs.existsSync(existingCareer.resume)) {
+        fs.unlinkSync(existingCareer.resume);
+      }
+
+      const resumePath = req.file ? req.file.path : ''; // Use empty string as fallback
+
+      // Update with new resume
+      const updatedCareer = await prisma.careers.update({
+        where: { id: careerId },
+        data: {
+          resume: resumePath,
+        },
+      });
+
+      res.status(200).json(updatedCareer);
+    } catch (error) {
+      if (req.file) fs.unlinkSync(req.file.path);
+      res.status(500).json({ error: "Failed to update resume" });
     }
   };
 }

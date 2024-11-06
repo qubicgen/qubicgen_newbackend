@@ -1,6 +1,7 @@
 import { Router } from "express";
 import CareerOperations from "../controllers/careerController";
 import checkAuth from "../config/checkAuth";
+import { upload } from '../utils/fileUpload';
 const router = Router();
 
 /**
@@ -100,7 +101,7 @@ const router = Router();
  *       500:
  *         description: Failed to create career
  */
-router.post('/newCareer', CareerOperations.createNewCareer);
+router.post('/newCareer', upload.single('resume'), CareerOperations.createNewCareer);
 
 /**
  * @swagger
@@ -204,5 +205,42 @@ router.put('/updateCareer/:careerId', checkAuth,CareerOperations.updateCareer);
  *         description: Failed to delete career
  */
 router.delete('/deleteCareer/:careerId', checkAuth,CareerOperations.deleteCareer);
+
+/**
+ * @swagger
+ * /updateResume/{careerId}:
+ *   put:
+ *     summary: Update a career entry's resume by ID
+ *     tags: [Career]
+ *     parameters:
+ *       - in: path
+ *         name: careerId
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: The career ID
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         multipart/form-data:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               resume:
+ *                 type: string
+ *                 format: binary
+ *     responses:
+ *       200:
+ *         description: Resume updated successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Career'
+ *       404:
+ *         description: Career not found
+ *       500:
+ *         description: Failed to update resume
+ */
+router.put('/updateResume/:careerId', checkAuth, upload.single('resume'), CareerOperations.updateResume);
 
 export default router;
