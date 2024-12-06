@@ -23,7 +23,9 @@ app.use(cors({
     'https://qubicgen.com/',
     'http://qubicgen.com',
     'http://localhost:5173',
-    'https://qg.vidyantra-dev.com'
+    'https://qg.vidyantra-dev.com',
+    'https://image.qubinest.com',
+    'https://image.qubinest.com/upload'
   ],
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
