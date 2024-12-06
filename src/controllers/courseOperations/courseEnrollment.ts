@@ -18,7 +18,7 @@ class CourseEnrollmentOperations {
       });
 
       res.status(201).json(newEnrollment);
-    } catch (error) {
+    } catch (error:any) {
       res.status(500).json({ error: "Failed to create enrollment", details: error.message });
     }
   }
@@ -27,7 +27,7 @@ class CourseEnrollmentOperations {
     try {
       const enrollments = await prisma.courseEnrollmentForm.findMany();
       res.status(200).json(enrollments);
-    } catch (error) {
+    } catch (error:any) {
       res.status(500).json({ error: "Failed to retrieve enrollments", details: error.message });
     }
   }
@@ -45,7 +45,7 @@ class CourseEnrollmentOperations {
       }
 
       res.status(200).json(enrollment);
-    } catch (error) {
+    } catch (error:any) {
       res.status(500).json({ error: "Failed to retrieve enrollment", details: error.message });
     }
   }
@@ -66,7 +66,7 @@ class CourseEnrollmentOperations {
       });
 
       res.status(200).json(updatedEnrollment);
-    } catch (error) {
+    } catch (error:any) {
       res.status(500).json({ error: "Failed to update enrollment", details: error.message });
     }
   }
@@ -80,7 +80,7 @@ class CourseEnrollmentOperations {
       });
 
       res.status(200).json({ message: "Enrollment deleted successfully" });
-    } catch (error) {
+    } catch (error:any) {
       res.status(500).json({ error: "Failed to delete enrollment", details: error.message });
     }
   }
