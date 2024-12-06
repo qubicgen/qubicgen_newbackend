@@ -17,7 +17,7 @@ const port=9098
 
 
 const app=express()
-app.use(express.json())
+app.use(express.json({limit: 10000}))
 app.use(cors({
   origin: [
     'https://qubicgen.com',
