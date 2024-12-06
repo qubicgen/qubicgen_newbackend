@@ -36,7 +36,7 @@ class CourseEnrollmentOperations {
     const { id } = req.params;
 
     try {
-      const enrollment = await prisma.courseEnrollmentForm.findUnique({
+      const enrollment = await prisma.courseEnrollmentForm.findFirst({
         where: { id },
       });
 
