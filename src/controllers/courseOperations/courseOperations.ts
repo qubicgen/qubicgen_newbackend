@@ -85,6 +85,7 @@ class CourseOperations {
             courseFaqs: { create: parsedFaqs },
             courseBrands: { create: parsedBrands },
           },
+          include: { courseBrands: true, courseLessons: true, courseFaqs: true },
         });
 
         res.status(201).json(newCourse);

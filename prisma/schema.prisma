@@ -96,6 +96,7 @@ model course{
   endDate DateTime?
   courseDescription String?
   courseImage String?
+  courseBanner String?
   brochure String?
   certificate String?
   courseBrands brands[]
