@@ -8,6 +8,7 @@ import queryRouter from './routes/queryRouter'
 import courseRouter from './routes/courses/courseRouter'
 import authenticationRouter from './routes/authRouter'
 import enrollmentRouter from './routes/courses/courseEnrollment'
+import testimonialRouter from './routes/testimonialRouter'
 import swaggerUi from 'swagger-ui-express'
 import swaggerSpec from './config/swagger'
 import cors from 'cors'
@@ -41,6 +42,7 @@ app.use('/qubicgen',queryRouter)
 app.use('/qubicgen',authenticationRouter)
 app.use('/qubicgen',courseRouter)
 app.use('/qubicgen',enrollmentRouter)
+app.use('/qubicgen',testimonialRouter)
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 app.use('/uploads', express.static('uploads'));
 
