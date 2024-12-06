@@ -31,24 +31,22 @@ class CourseEnrollmentOperations {
       res.status(500).json({ error: "Failed to retrieve enrollments", details: error.message });
     }
   }
-
-  static async getEnrollmentById(req: Request, res: Response) {
+  static async getEnrollmentData(req: Request, res: Response) {
     const { id } = req.params;
-
     try {
-      const enrollment = await prisma.courseEnrollmentForm.findFirst({
-        where: { id },
-      });
-
-      if (!enrollment) {
-        return res.status(404).json({ error: "Enrollment not found" });
-      }
-
-      res.status(200).json(enrollment);
+      const enrollments = await prisma.courseEnrollmentForm.findFirst(
+        {
+          where:{
+            id:id
+          }
+        }
+      );
+      res.status(200).json(enrollments);
     } catch (error:any) {
-      res.status(500).json({ error: "Failed to retrieve enrollment", details: error.message });
+      res.status(500).json({ error: "Failed to retrieve enrollments", details: error.message });
     }
   }
+
 
   static async updateEnrollment(req: Request, res: Response) {
     const { id } = req.params;

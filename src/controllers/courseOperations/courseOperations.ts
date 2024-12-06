@@ -8,6 +8,7 @@ import path from "path";
 const prisma = new PrismaClient();
 const jwtSecret = process.env.JWT_SECRET || "";
 
+// Multer configuration for file uploads
 const upload = multer({
   storage: multer.diskStorage({
     destination: (req, file, cb) => {
@@ -26,6 +27,7 @@ const upload = multer({
 ]);
 
 class CourseOperations {
+  // Extracts user data from the JWT token
   static extractUserDataFromToken(req: Request) {
     const token = req.headers.authorization?.split(" ")[1];
     if (!token) throw new Error("Token is missing");
@@ -37,16 +39,35 @@ class CourseOperations {
     }
   }
 
+  // Create a new course with related lessons, FAQs, and brands
   static async createCourse(req: Request, res: Response) {
     upload(req, res, async (err) => {
       if (err) return res.status(500).json({ error: "File upload failed", details: err.message });
-      const brochurePath = req.file ? req.file.path : "";
-      const certificatePath = req.file ? req.file.path : "";
 
       try {
-        const userData = CourseOperations.extractUserDataFromToken(req);
-        const { courseName, courseType, duration, maxMentees, brochure,certificate,technologies, rating, startDate, endDate, courseDescription, lessons, faqs, brands } = req.body;
+        const {
+          courseName,
+          courseType,
+          duration,
+          maxMentees,
+          technologies,
+          rating,
+          brochure,
+          certificate,
+          startDate,
+          endDate,
+          courseDescription,
+          lessons,
+          faqs,
+          brands,
+        } = req.body;
 
+        // Parse JSON arrays or default to empty arrays
+        const parsedLessons = lessons ?lessons : [];
+        const parsedFaqs = faqs ?faqs : [];
+        const parsedBrands = brands ? brands : [];
+
+        // Create course with nested related entities
         const newCourse = await prisma.course.create({
           data: {
             courseName,
@@ -58,11 +79,11 @@ class CourseOperations {
             startDate: new Date(startDate),
             endDate: new Date(endDate),
             courseDescription,
-            brochure: brochure,
-            certificate:certificate,
-            courseLessons: { create: JSON.parse(lessons || "[]") },
-            courseFaqs: { create: JSON.parse(faqs || "[]") },
-            courseBrands: { create: JSON.parse(brands || "[]") },
+            brochure:brochure,
+            certificate: certificate,
+            courseLessons: { create: parsedLessons },
+            courseFaqs: { create: parsedFaqs },
+            courseBrands: { create: parsedBrands },
           },
         });
 
@@ -73,8 +94,9 @@ class CourseOperations {
     });
   }
 
-  static async getCourseById(req: Request, res: Response) {
-    const {id}=req.params
+  // Get a course by its ID, including related entities
+  static async getCouseById(req: Request, res: Response) {
+    const { id } = req.params;
     try {
       const courses = await prisma.course.findFirst({
         where:{
@@ -87,8 +109,7 @@ class CourseOperations {
       res.status(500).json({ error: "Failed to retrieve courses", details: error.message });
     }
   }
-
-
+  // Get all courses with their related entities
   static async getAllCourses(req: Request, res: Response) {
     try {
       const courses = await prisma.course.findMany({
@@ -100,15 +121,29 @@ class CourseOperations {
     }
   }
 
-
+  // Update an existing course and its related entities
   static async updateCourse(req: Request, res: Response) {
     upload(req, res, async (err) => {
       if (err) return res.status(500).json({ error: "File upload failed", details: err.message });
-      const brochurePath = req.file ? req.file.path : "";
-      const certificatePath = req.file ? req.file.path : "";
+
       try {
         const { id } = req.params;
-        const { courseName, courseType, duration, maxMentees, technologies, rating, startDate, endDate, courseDescription, lessons, faqs, brands } = req.body;
+        const {
+          courseName,
+          courseType,
+          duration,
+          maxMentees,
+          technologies,
+          rating,
+          brochure,
+          certificate,
+          startDate,
+          endDate,
+          courseDescription,
+          lessons,
+          faqs,
+          brands,
+        } = req.body;
 
         const updatedCourse = await prisma.course.update({
           where: { id },
@@ -122,11 +157,11 @@ class CourseOperations {
             startDate: new Date(startDate),
             endDate: new Date(endDate),
             courseDescription,
-            brochure:brochurePath,
-            certificate: certificatePath,
-            courseLessons: { deleteMany: {}, create: JSON.parse(lessons || "[]") },
-            courseFaqs: { deleteMany: {}, create: JSON.parse(faqs || "[]") },
-            courseBrands: { deleteMany: {}, create: JSON.parse(brands || "[]") },
+            brochure: brochure,
+            certificate: certificate,
+            courseLessons: { deleteMany: {}, create: lessons || "[]" },
+            courseFaqs: { deleteMany: {}, create: faqs || "[]" },
+            courseBrands: { deleteMany: {}, create: brands || "[]" },
           },
         });
 
@@ -137,9 +172,11 @@ class CourseOperations {
     });
   }
 
+  // Delete a course by its ID
   static async deleteCourse(req: Request, res: Response) {
+    const { id } = req.params;
     try {
-      await prisma.course.delete({ where: { id: req.params.id } });
+      await prisma.course.delete({ where: { id } });
       res.status(200).json({ message: "Course deleted successfully" });
     } catch (error: any) {
       res.status(500).json({ error: "Failed to delete course", details: error.message });

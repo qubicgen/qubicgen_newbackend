@@ -4,7 +4,7 @@ import CourseOperations from '../../controllers/courseOperations/courseOperation
 import checkAuth from '../../config/checkAuth'
 router.post('/newCourse',checkAuth,CourseOperations.createCourse)
 router.get('/allCourses',CourseOperations.getAllCourses)
-router.get('/courses/:id',CourseOperations.getCourseById)
+router.get('/courses/:id',CourseOperations.getCouseById)
 router.put('/updateCourse/:id',checkAuth,CourseOperations.updateCourse)
 router.delete('/deleteCourse/:id',checkAuth,CourseOperations.deleteCourse)
 export default router
