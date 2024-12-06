@@ -172,6 +172,11 @@ class CourseOperations {
             courseFaqs: { deleteMany: {}, create: faqs || "[]" },
             courseBrands: { deleteMany: {}, create: brands || "[]" },
           },
+          include:{
+            courseBrands:true,
+            courseFaqs:true,
+            courseLessons:true
+          }
         });
 
         res.status(200).json(updatedCourse);
