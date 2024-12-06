@@ -60,7 +60,6 @@ model careers{
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt  
 }
-
 model projectForm{
   id String @id @default(uuid())
   name String
@@ -82,6 +81,64 @@ model studentForm{
   college String
   stream String
   message String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+model course{
+  id String @id @default(uuid())
+  courseName String?
+  courseType String?
+  duration Int?
+  maxMentees Int?
+  technologies String?
+  rating Int?
+  startDate DateTime?
+  endDate DateTime?
+  courseDescription String?
+  courseImage String?
+  brochure String?
+  certificate String?
+  courseBrands brands[]
+  courseLessons lessons[]
+  courseFaqs faqs[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+model brands{
+  id String @id @default(uuid())
+  brandLogo String?
+  courseId String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  course course? @relation(fields: [courseId],references: [id])
+}
+
+model lessons{
+  id String @id @default(uuid())
+  lessonTitle String?
+  lessonDescription String?
+  courseId String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  course course? @relation(fields: [courseId],references: [id])
+}
+
+model faqs{
+  id String @id @default(uuid())
+  question String?
+  answer String?
+  courseId String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  course course? @relation(fields: [courseId],references: [id])
+}
+
+model courseEnrollmentForm{
+  id String @id @default(uuid())
+  fullName String?
+  contactNumber String?
+  email String?
+  collegeName String?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }

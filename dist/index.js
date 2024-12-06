@@ -33,6 +33,9 @@ app.use('/qubicgen', queryRouter_1.default);
 app.use('/qubicgen', authRouter_1.default);
 app.use('/api-docs', swagger_ui_express_1.default.serve, swagger_ui_express_1.default.setup(swagger_1.default));
 app.use('/uploads', express_1.default.static('uploads'));
+app.get('/', (req, res) => {
+    res.status(200).send('Hello from qubicgen backend');
+});
 app.listen(port, () => {
     console.log(`Server started on http://localhost:${port}, api documentation available at http://localhost:${port}/api-docs`);
 });

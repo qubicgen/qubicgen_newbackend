@@ -44,7 +44,7 @@ const router = Router();
  *       500:
  *         description: Failed to create query entry
  */
-router.post("/newQuery", checkAuth,QueryOperations.create);
+router.post("/newQuery",QueryOperations.create);
 
 /**
  * @swagger
