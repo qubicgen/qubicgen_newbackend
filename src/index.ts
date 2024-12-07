@@ -18,7 +18,9 @@ const port=9098
 
 
 const app=express()
-app.use(express.json({limit: 10000}))
+
+app.use(express.json({ limit: '100mb' })); // Increase the limit to 10 MB
+app.use(express.urlencoded({ limit: '100mb', extended: true }));
 app.use(cors({
   origin: [
     'https://qubicgen.com',

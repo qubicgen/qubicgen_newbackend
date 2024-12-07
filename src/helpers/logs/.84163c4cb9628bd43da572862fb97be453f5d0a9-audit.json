@@ -1,0 +1,15 @@
+{
+    "keep": {
+        "days": true,
+        "amount": 14
+    },
+    "auditLog": "C:\\Users\\dell\\Desktop\\Sanju Space\\Web Applications\\QubicGen\\qubicgen_newbackend\\src\\helpers\\logs\\.84163c4cb9628bd43da572862fb97be453f5d0a9-audit.json",
+    "files": [
+        {
+            "date": 1733519766330,
+            "name": "C:\\Users\\dell\\Desktop\\Sanju Space\\Web Applications\\QubicGen\\qubicgen_newbackend\\src\\helpers\\logs\\application-2024-12-07.log",
+            "hash": "955e430a8fe035578f208874b778a948c46b033a9091cd2396d5954c89ca204e"
+        }
+    ],
+    "hashType": "sha256"
+}
