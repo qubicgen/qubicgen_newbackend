@@ -143,6 +143,7 @@ model courseEnrollmentForm{
   contactNumber String?
   email String?
   coursePrice Int?
+  programName String?
   collegeName String?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
