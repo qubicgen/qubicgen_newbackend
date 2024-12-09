@@ -140,7 +140,6 @@ class CourseOperations {
   static async updateCourse(req: Request, res: Response) {
     upload(req, res, async (err) => {
       if (err) return res.status(500).json({ error: "File upload failed", details: err.message });
-
       try {
         const { id } = req.params;
         const {
