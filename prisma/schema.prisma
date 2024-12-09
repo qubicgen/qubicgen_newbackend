@@ -99,6 +99,9 @@ model course{
   courseBanner String?
   brochure String?
   certificate String?
+  selfPaced Int?
+  mentorship Int?
+  dualPath Int?
   courseBrands brands[]
   courseLessons lessons[]
   courseFaqs faqs[]
@@ -139,6 +142,7 @@ model courseEnrollmentForm{
   fullName String?
   contactNumber String?
   email String?
+  coursePrice Int?
   collegeName String?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt

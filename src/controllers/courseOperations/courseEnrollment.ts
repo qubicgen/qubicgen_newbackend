@@ -5,7 +5,7 @@ const prisma = new PrismaClient();
 
 class CourseEnrollmentOperations {
   static async createEnrollment(req: Request, res: Response) {
-    const { fullName, contactNumber, email, collegeName } = req.body;
+    const { fullName, contactNumber, email, collegeName,coursePrice } = req.body;
 
     try {
       const newEnrollment = await prisma.courseEnrollmentForm.create({
@@ -14,6 +14,7 @@ class CourseEnrollmentOperations {
           contactNumber,
           email,
           collegeName,
+          coursePrice,
         },
       });
 
@@ -22,7 +23,6 @@ class CourseEnrollmentOperations {
       res.status(500).json({ error: "Failed to create enrollment", details: error.message });
     }
   }
-
   static async getAllEnrollments(req: Request, res: Response) {
     try {
       const enrollments = await prisma.courseEnrollmentForm.findMany();
@@ -50,7 +50,7 @@ class CourseEnrollmentOperations {
 
   static async updateEnrollment(req: Request, res: Response) {
     const { id } = req.params;
-    const { fullName, contactNumber, email, collegeName } = req.body;
+    const { fullName, contactNumber, email, collegeName,coursePrice } = req.body;
 
     try {
       const updatedEnrollment = await prisma.courseEnrollmentForm.update({
@@ -60,6 +60,7 @@ class CourseEnrollmentOperations {
           contactNumber,
           email,
           collegeName,
+          coursePrice
         },
       });
 

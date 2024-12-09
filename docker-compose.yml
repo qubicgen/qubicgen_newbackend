@@ -1,0 +1,20 @@
+version: '3'
+
+services:
+  memcached:
+    image: memcached:latest
+    container_name: memcached_container_qubicgen
+    ports:
+      - "11213:11213"
+    environment:
+      - MEMCACHED_MAX_MEMORY=64
+      - MEMCACHED_THREADS=4
+    restart: always
+    networks:
+      - memcached_network
+
+networks:
+  memcached_network:
+    name: custom_memcached_network
+    driver: bridge
+
