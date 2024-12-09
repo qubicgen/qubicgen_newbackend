@@ -6,7 +6,7 @@ import Memcached from 'memcached'; // Import Memcached
 const prisma = new PrismaClient();
 
 // Initialize Memcached client
-const memcached = new Memcached('localhost:11211'); // Assuming Memcached is running locally on the default port
+const memcached = new Memcached(process.env.memcachedServer||'localhost:11211'); // Assuming Memcached is running locally on the default port
 
 class CourseEnrollmentOperations {
   static async createEnrollment(req: Request, res: Response) {
