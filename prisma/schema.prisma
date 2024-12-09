@@ -99,6 +99,7 @@ model course{
   courseBanner String?
   brochure String?
   certificate String?
+  certificate2 String?
   selfPaced Int?
   mentorship Int?
   dualPath Int?

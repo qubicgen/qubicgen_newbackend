@@ -56,6 +56,7 @@ class CourseOperations {
           rating,
           brochure,
           certificate,
+          certificate2,
           selfPaced,
           mentorship,
           dualPath,
@@ -89,15 +90,16 @@ class CourseOperations {
             courseDescription,
             brochure:brochure,
             certificate: certificate,
+            certificate2:certificate2,
             selfPaced:selfPaced,
             mentorship:mentorship,
             dualPath:dualPath,          
             courseLessons: { create: parsedLessons },
             courseFaqs: { create: parsedFaqs },
             courseBrands: { create: parsedBrands },
-            courseCertificates:{ create: parsedCertificates }
+            // courseCertificates:{ create: parsedCertificates }
           },
-          include: { courseBrands: true, courseLessons: true, courseFaqs: true,courseCertificates:true },
+          include: { courseBrands: true, courseLessons: true, courseFaqs: true },
         });
 
         res.status(201).json(newCourse);
@@ -152,6 +154,7 @@ class CourseOperations {
           courseBanner,
           brochure,
           certificate,
+          certificate2,
           selfPaced,
           mentorship,
           dualPath,
@@ -180,19 +183,20 @@ class CourseOperations {
             courseDescription,
             brochure: brochure,
             certificate: certificate,
+            certificate2:certificate2,
             selfPaced: selfPaced,
             mentorship: mentorship,
             dualPath: dualPath,
             courseLessons: { deleteMany: {}, create: lessons || "[]" },
             courseFaqs: { deleteMany: {}, create: faqs || "[]" },
             courseBrands: { deleteMany: {}, create: brands || "[]" },
-            courseCertificates:{deleteMany:{},create:certificates || "[]"}
+            // courseCertificates:{deleteMany:{},create:certificates || "[]"}
           },
           include:{
             courseBrands:true,
             courseFaqs:true,
             courseLessons:true,
-            courseCertificates:true
+            // courseCertificates:true
           }
         });
 
