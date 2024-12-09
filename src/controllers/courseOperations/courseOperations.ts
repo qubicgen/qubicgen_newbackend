@@ -65,13 +65,14 @@ class CourseOperations {
           lessons,
           faqs,
           brands,
+          certificates
         } = req.body;
 
         // Parse JSON arrays or default to empty arrays
         const parsedLessons = lessons ?lessons : [];
         const parsedFaqs = faqs ?faqs : [];
         const parsedBrands = brands ? brands : [];
-
+        const parsedCertificates=certificates?certificates:[]
         // Create course with nested related entities
         const newCourse = await prisma.course.create({
           data: {
@@ -94,8 +95,9 @@ class CourseOperations {
             courseLessons: { create: parsedLessons },
             courseFaqs: { create: parsedFaqs },
             courseBrands: { create: parsedBrands },
+            courseCertificates:{ create: parsedCertificates }
           },
-          include: { courseBrands: true, courseLessons: true, courseFaqs: true },
+          include: { courseBrands: true, courseLessons: true, courseFaqs: true,courseCertificates:true },
         });
 
         res.status(201).json(newCourse);
@@ -113,7 +115,7 @@ class CourseOperations {
         where:{
           id:id
         },
-        include: { courseBrands: true, courseLessons: true, courseFaqs: true },
+        include: { courseBrands: true, courseLessons: true, courseFaqs: true,courseCertificates:true },
       });
       res.status(200).json(courses);
     } catch (error: any) {
@@ -124,7 +126,7 @@ class CourseOperations {
   static async getAllCourses(req: Request, res: Response) {
     try {
       const courses = await prisma.course.findMany({
-        include: { courseBrands: true, courseLessons: true, courseFaqs: true },
+        include: { courseBrands: true, courseLessons: true, courseFaqs: true,courseCertificates:true },
       });
       res.status(200).json(courses);
     } catch (error: any) {
@@ -159,6 +161,7 @@ class CourseOperations {
           lessons,
           faqs,
           brands,
+          certificates
         } = req.body;
 
         const updatedCourse = await prisma.course.update({
@@ -183,11 +186,13 @@ class CourseOperations {
             courseLessons: { deleteMany: {}, create: lessons || "[]" },
             courseFaqs: { deleteMany: {}, create: faqs || "[]" },
             courseBrands: { deleteMany: {}, create: brands || "[]" },
+            courseCertificates:{deleteMany:{},create:certificates || "[]"}
           },
           include:{
             courseBrands:true,
             courseFaqs:true,
-            courseLessons:true
+            courseLessons:true,
+            courseCertificates:true
           }
         });
 

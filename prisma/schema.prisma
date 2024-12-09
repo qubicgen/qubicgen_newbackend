@@ -105,6 +105,7 @@ model course{
   courseBrands brands[]
   courseLessons lessons[]
   courseFaqs faqs[]
+  courseCertificates certificates[]
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
@@ -117,6 +118,14 @@ model brands{
   course course? @relation(fields: [courseId],references: [id])
 }
 
+model certificates{
+  id String @id @default(uuid())
+  certificateUrl String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  courseId String?
+  course course? @relation(fields: [courseId],references: [id])
+}
 model lessons{
   id String @id @default(uuid())
   lessonTitle String?
