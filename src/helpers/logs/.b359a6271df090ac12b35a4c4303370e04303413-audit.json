@@ -6,11 +6,6 @@
     "auditLog": "D:\\QubicgenPortfolio\\backendNew\\src\\helpers\\logs\\.b359a6271df090ac12b35a4c4303370e04303413-audit.json",
     "files": [
         {
-            "date": 1733461851761,
-            "name": "D:\\QubicgenPortfolio\\backendNew\\src\\helpers\\logs\\application-2024-12-06.log",
-            "hash": "01978e33ea7cab23633fe8c3a96761c21925cbf077e47d902579ce110e55dc68"
-        },
-        {
             "date": 1733519116536,
             "name": "D:\\QubicgenPortfolio\\backendNew\\src\\helpers\\logs\\application-2024-12-07.log",
             "hash": "238370866d37bcbb5dfb6b371bbbe3d09eae7cb18b520d567f6ece4eab764ff7"
@@ -24,6 +19,11 @@
             "date": 1733770607873,
             "name": "D:\\QubicgenPortfolio\\backendNew\\src\\helpers\\logs\\application-2024-12-10.log",
             "hash": "16af5467be2bbfbbda13c56c4d4edd18d4ad21e4088da8bc67b83ba465c2fa74"
+        },
+        {
+            "date": 1734674416509,
+            "name": "D:\\QubicgenPortfolio\\backendNew\\src\\helpers\\logs\\application-2024-12-20.log",
+            "hash": "1cbcdb1826bdeebeca601ed0644cfedbd64d669e5e544e0323175b77691e0cc9"
         }
     ],
     "hashType": "sha256"
