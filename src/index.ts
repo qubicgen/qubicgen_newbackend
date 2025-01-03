@@ -28,6 +28,11 @@ app.use(
       'http://localhost:5173',
       'https://qg.vidyantra-dev.com',
       'https://image.qubinest.com',
+      'https://www.qubicgen.com',
+      'https://www.qubicgen.com',
+
+       'https://www.qubicgen.com'
+
     ],
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
