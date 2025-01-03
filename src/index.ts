@@ -21,20 +21,20 @@ const app=express()
 
 app.use(express.json({ limit: '20000mb' }))
 app.use(express.urlencoded({ limit: '100mb', extended: true }));
-app.use(cors({
-  origin: [
-    'https://qubicgen.com',
-    'https://qubicgen.com/',
-    'http://qubicgen.com',
-    'http://localhost:5173',
-    'https://qg.vidyantra-dev.com',
-    'https://image.qubinest.com',
-    'https://image.qubinest.com/upload'
-  ],
-  credentials: true,
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization']
-}));
+app.use(
+  cors({
+    origin: [
+      'https://qubicgen.com',
+      'http://localhost:5173',
+      'https://qg.vidyantra-dev.com',
+      'https://image.qubinest.com',
+    ],
+    credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+  })
+);
+app.options('*', cors());
 
 app.use('/qubicgen',careerRouter)
 app.use('/qubicgen',getInTouchRouter)
