@@ -34,7 +34,9 @@ app.use(
     allowedHeaders: ['Content-Type', 'Authorization'],
   })
 );
+//updated policy
 app.options('*', cors());
+
 
 app.use('/qubicgen',careerRouter)
 app.use('/qubicgen',getInTouchRouter)
