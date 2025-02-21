@@ -6,9 +6,14 @@
     "auditLog": "C:\\Users\\dell\\Desktop\\Sanju Space\\Web Applications\\QubicGen\\qubicgen_newbackend\\src\\helpers\\logs\\.84163c4cb9628bd43da572862fb97be453f5d0a9-audit.json",
     "files": [
         {
-            "date": 1735899601831,
-            "name": "C:\\Users\\dell\\Desktop\\Sanju Space\\Web Applications\\QubicGen\\qubicgen_newbackend\\src\\helpers\\logs\\application-2025-01-03.log",
-            "hash": "6ce94b3b29b93375a469c738a3264cfdb12aed5cdc7a35618ba5aa5c7d8db0eb"
+            "date": 1740060984716,
+            "name": "C:\\Users\\dell\\Desktop\\Sanju Space\\Web Applications\\QubicGen\\qubicgen_newbackend\\src\\helpers\\logs\\application-2025-02-20.log",
+            "hash": "1b33eb5a37d6fee98d94fb2c559d5401c6f9a35f74a8d21b0a4931eb1dacc820"
+        },
+        {
+            "date": 1740125182309,
+            "name": "C:\\Users\\dell\\Desktop\\Sanju Space\\Web Applications\\QubicGen\\qubicgen_newbackend\\src\\helpers\\logs\\application-2025-02-21.log",
+            "hash": "730167fdb6021b70ac6a669eaa59fb78dd35914b6a93f2ecdf321b08bd956d8d"
         }
     ],
     "hashType": "sha256"

@@ -168,3 +168,27 @@ model testimonials{
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
+
+model Contact {
+  id                String    @id @default(uuid())
+  registrationDate  DateTime  @default(now())
+  name              String
+  email             String
+  whatsapp          String
+  college           String
+  studentEmail      String
+  year              String
+  domain            String
+  amountPaid        Float
+  totalFees         Float
+  preferredMonth    String
+  referrals         Json      // Stores array of { name: string, contact: string }
+  balanceFees       Float
+  discount          Json      // Can store number or string
+  createdAt         DateTime  @default(now())
+  updatedAt         DateTime  @updatedAt
+
+  @@index([email])
+  @@index([studentEmail])
+  @@index([createdAt])
+}

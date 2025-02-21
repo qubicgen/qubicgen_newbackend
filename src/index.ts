@@ -11,6 +11,7 @@ import enrollmentRouter from './routes/courses/courseEnrollment'
 import testimonialRouter from './routes/testimonialRouter'
 import swaggerUi from 'swagger-ui-express'
 import swaggerSpec from './config/swagger'
+import contactRoute from './routes/contactRoutes'
 import cors from 'cors'
 import { Request,Response } from 'express'
 dotenv.config()
@@ -25,13 +26,16 @@ app.use(
   cors({
     origin: [
       'https://qubicgen.com',
+      'http://localhost:8085', 
       'http://localhost:5173',
       'https://qg.vidyantra-dev.com',
       'https://image.qubinest.com',
       'https://www.qubicgen.com',
       'https://www.qubicgen.com',
 
-       'https://www.qubicgen.com'
+       'https://www.qubicgen.com',
+       'https://qems.qubinest.com', // Ensure EMS frontend is allowed
+    'http://localhost:5173' // For local development
 
     ],
     credentials: true,
@@ -52,6 +56,7 @@ app.use('/qubicgen',authenticationRouter)
 app.use('/qubicgen',courseRouter)
 app.use('/qubicgen',enrollmentRouter)
 app.use('/qubicgen',testimonialRouter)
+app.use('/qubicgen/contact',contactRoute)
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 app.use('/uploads', express.static('uploads'));
 
